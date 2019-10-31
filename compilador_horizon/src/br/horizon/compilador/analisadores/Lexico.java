@@ -13,17 +13,19 @@ public class Lexico {
 	private ErrorHandler eh;
 	private long ic;
 	private char readCharacter = ' ';
+	private char c = ' ';
 	
 	public Lexico(String filename) throws FileNotFoundException {
 		this.fl = new FileLoader(filename);		
 	}
 	
 	public Token nextToken() throws ErroLexicoException, IOException {
+		
 		while (true) {
 			lexema = new StringBuilder();
 			
 			try {
-				char c;
+				
 				Token t = null;
 				
 				//***** verifica fim de arquivo *****
@@ -106,7 +108,7 @@ public class Lexico {
 				return new Token(TokenType.EOF, "<mensagem erro>");
 			} catch (ErroLexicoException ele) {
 				//***** trata o erro léxico (registra) *****
-				ErrorHandler.getInstance().registraErro(ele);
+				//ErrorHandler.getInstance().registraErro(ele);
 			}
 		}
 	}
@@ -118,13 +120,84 @@ public class Lexico {
 	}
 
 	private Token processaNUM() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		return null;
 	}
 
-	private Token processaRELOP() {
-		// TODO Auto-generated method stub
+	private Token processaRELOP() throws IOException {
+		try {
+			insertLexema();
+			c = fl.getNextChar();
+			
+			if (c == 'l' | c == 'g') {
+				insertLexema();
+				c = fl.getNextChar();
+				
+				if (c == 't' | c == 'e') {
+					insertLexema();
+					return genToken(TokenType.RELOP);
+				}
+				
+				else {
+					insertLexema();
+					genError(lexema.toString());
+					lexema.setLength(0);
+				}
+			}
+			
+			else if (c == 'e') {
+				insertLexema();
+				c = fl.getNextChar();
+				
+				if (c == 'q') {
+					insertLexema();
+					return genToken(TokenType.RELOP);
+				}
+				
+				else {
+					insertLexema();
+					genError(lexema.toString());
+					lexema.setLength(0);
+				}
+			}
+			
+			else if (c == 'd') {
+				insertLexema();
+				c = fl.getNextChar();
+				
+				if (c == 'f') {
+					insertLexema();
+					return genToken(TokenType.RELOP);
+				}
+				
+				else {
+					insertLexema();
+					genError(lexema.toString());
+					lexema.setLength(0);
+				}
+			}
+			
+			else {
+				insertLexema();
+				genError(lexema.toString());
+				lexema.setLength(0);
+			}
+		} catch (Exception e) {
+        	fl.resetLastChar();
+        	genError(lexema.toString());
+		}
 		return null;
+	}
+
+	private Token genToken(TokenType relop) {
+		// Auto-generated method stub
+		return null;
+	}
+
+	private void insertLexema() {
+		if(!Character.isWhitespace(c)) {
+			lexema.append(c);
+		}
 	}
 
 	private Token processaID() throws IOException {

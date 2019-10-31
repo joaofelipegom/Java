@@ -1,12 +1,20 @@
 package br.horizon.compilador.analisadores;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import br.horizon.compilador.utils.ErroLexicoException;
+import br.horizon.compilador.utils.TabSimbolos;
+import br.horizon.compilador.utils.Token;
+import br.horizon.compilador.utils.TokenType;
+
 public class Sintatico {
 	private Lexico lex;
 	public Sintatico(String filename)  throws FileNotFoundException {
 		this.lex = new Lexico(filename);
 	}
 	
-	public void processar() {
+	public void processar() throws ErroLexicoException, IOException {
 		// Imprimir o cabeçalho de saída
 		// ------------------------------------
 		// (lin, col)  | Token        | Lexema
@@ -22,7 +30,7 @@ public class Sintatico {
 		TabSimbolos.getInstance().printTabela();
 		
 		// Imprimir relatório de erros
-		ErrorHandler.getInstance().printErrorReport();
+		//ErrorHandler.getInstance().printErrorReport();
 	}
 
 }

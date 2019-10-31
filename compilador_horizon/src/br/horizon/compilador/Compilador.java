@@ -1,11 +1,13 @@
 package br.horizon.compilador;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import br.horizon.compilador.analisadores.Sintatico;
+import br.horizon.compilador.utils.ErroLexicoException;
 
 public class Compilador {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ErroLexicoException, IOException {
 		// Recebe nome do arquivo a ser compilado
 		if (args.length != 1) {
 			// Imprimir o "usage" do programa

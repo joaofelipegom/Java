@@ -1,5 +1,8 @@
 package br.horizon.compilador.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TabSimbolos {
 
 	private static TabSimbolos instance = new TabSimbolos();
@@ -20,6 +23,11 @@ public class TabSimbolos {
 	
 	public void printTabela() {
 		
+	}
+
+	public Token addToken(String string, long line, long ic) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

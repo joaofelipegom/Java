@@ -20,5 +20,15 @@ public class Token {
 		
 	}
 
+	public Object getTokenType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void printToken() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	// Criar getters & setters
 }
