@@ -106,9 +106,6 @@ public class Lexico {
 			} catch (IOException e) {
 				//***** fallback: erro de leitura, interromper processamento
 				return new Token(TokenType.EOF, "<mensagem erro>");
-			} catch (ErroLexicoException ele) {
-				//***** trata o erro léxico (registra) *****
-				//ErrorHandler.getInstance().registraErro(ele);
 			}
 		}
 	}
@@ -119,8 +116,28 @@ public class Lexico {
 		eh.errorRegister(error);
 	}
 
-	private Token processaNUM() {
-		//  Auto-generated method stub
+	private Token processaNUM() throws EOFException, IOException {
+		while(Character.isDigit(c)) {
+			insertLexema();
+			c = fl.getNextChar();
+		}
+		
+		if(c == '.') {
+			return processaFloat();
+		} else if(c == ' ') {
+			return processaInt();
+		}
+		
+		return null;
+	}
+
+	private Token processaInt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Token processaFloat() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
